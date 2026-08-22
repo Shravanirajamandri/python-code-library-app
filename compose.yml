@@ -1,4 +1,3 @@
----
 services:
   db:
     image: shaikmustafa/arshad:db
@@ -19,7 +18,6 @@ services:
       - mynetwork
     depends_on:
       - db
-    
 
   book_service:
     image: shaikmustafa/arshad:book
@@ -31,6 +29,7 @@ services:
       - mynetwork
     depends_on:
       - db
+
   borrow_service:
     image: shaikmustafa/arshad:borrow
     deploy:
@@ -57,4 +56,4 @@ services:
 
 networks:
   mynetwork:
-    driver: bridge
+    driver: overlay
