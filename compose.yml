@@ -1,3 +1,4 @@
+---
 services:
   db:
     image: shravanirajamandri/projectf:dbimage
@@ -16,6 +17,8 @@ services:
       - "5001:5001"
     networks:
       - mynetwork
+    depends_on:
+      - db
 
   book_service:
     image: shravanirajamandri/projectf:bookimage
@@ -25,6 +28,8 @@ services:
       - "5002:5002"
     networks:
       - mynetwork
+    depends_on:
+      - db
 
   borrow_service:
     image: shravanirajamandri/projectf:borrowimage
@@ -34,15 +39,21 @@ services:
       - "5003:5003"
     networks:
       - mynetwork
+    depends_on:
+      - db
 
   frontend:
-    image: shravanirajamandri/projectf:frontendimage
+    image: shravanirajamandri/projectf:appimage
     deploy:
       replicas: 1
     ports:
       - "5000:5000"
     networks:
       - mynetwork
+    depends_on:
+      - auth_service
+      - book_service
+      - borrow_service
 
 networks:
   mynetwork:
