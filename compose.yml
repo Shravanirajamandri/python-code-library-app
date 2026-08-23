@@ -1,54 +1,49 @@
----
 services:
-  db: 
+  db:
     image: shravanirajamandri/projectf:db
     deploy:
       replicas: 1
     ports:
       - "3306:3306"
     networks:
-       - mynetwork
-      
-   auth_service:
+      - mynetwork
+
+  auth_service:
     image: shravanirajamandri/projectf:auth
     deploy:
       replicas: 1
     ports:
-        - "5001:5001"
+      - "5001:5001"
     networks:
       - mynetwork
-      
+
   book_service:
     image: shravanirajamandri/projectf:book
     deploy:
       replicas: 1
-    ports: 
+    ports:
       - "5002:5002"
     networks:
       - mynetwork
-     
+
   borrow_service:
     image: shravanirajamandri/projectf:borrow
-    deploy: 
-       replicas: 1
+    deploy:
+      replicas: 1
     ports:
       - "5003:5003"
     networks:
       - mynetwork
-      
-   frontend:
+
+  frontend:
     image: shravanirajamandri/projectf:frontend
     deploy:
-       replicas: 1
+      replicas: 1
     ports:
       - "5000:5000"
     networks:
-     - mynetwork
-     
-     
+      - mynetwork
+
 networks:
   mynetwork:
-    driver: bridge
-    
-     
-	  
+    driver: overlay
